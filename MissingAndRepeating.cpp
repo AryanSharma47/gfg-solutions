@@ -1,3 +1,58 @@
+//TC : O(n) || SC : O(n)
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> v(n,0);
+        vector<int> ans;
+        
+        for(int i=0;i<n;i++)
+        {
+            if(v[arr[i]-1] == 0)
+            v[arr[i]-1] = arr[i];
+            else
+            v[arr[i]-1] = -1;
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(v[i] < 0)
+            ans.insert(ans.begin(),i+1);
+            
+            if(v[i] == 0)
+            ans.push_back(i+1);
+        }
+        return ans;
+    }
+};
+
+//TC : O(n) || SC : O(1)
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size();
+        vector<int> ans;
+        
+        for(int i=0;i<n;i++)
+        {
+            int ind = abs(arr[i]);
+            
+            if(arr[ind-1] < 0)
+            ans.push_back(ind);
+            else
+            arr[ind-1] *= -1;
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i] > 0)
+            ans.push_back(i+1);
+        }
+        return ans;
+    }
+};
+
+
 //First Optimal Approach
 class Solution{
 public:
